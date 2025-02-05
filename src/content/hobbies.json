@@ -1,0 +1,41 @@
+[
+  {
+    "id": "0",
+    "name": "Sports & GYM",
+    "description": "I'm not a sports personality, but I enjoy sports and hitting the gym.",
+    "smallWidth": "6rem",
+    "largeWidth": "8rem",
+    "smallHeight": "6rem",
+    "largeHeight": "8rem",
+    "strokeWidth": "7",
+    "viewBox": "0 0 512 512",
+    "transform": null,
+    "animationDuration": 18
+  },
+  {
+    "id": "1",
+    "name": "Craft & Read",
+    "description": "I  enjoy reading romance dramas, adventure novels, and occasionally self-help books.",
+    "smallWidth": "6rem",
+    "largeWidth": "8rem",
+    "smallHeight": "6rem",
+    "largeHeight": "8rem",
+    "strokeWidth": "7",
+    "viewBox": "0 0 512 512",
+    "transform": null,
+    "animationDuration": 18
+  },
+  {
+    "id": "2",
+    "name": "Video games",
+    "description": "Video gaming is the ultimate mix of relaxation, strategy, and escapism. ",
+    "smallWidth": "10rem",
+    "largeWidth": "12rem",
+    "smallHeight": "6rem",
+    "largeHeight": "8rem",
+    "strokeWidth": "18",
+    "viewBox": "0 0 300.000000 179.000000",
+    "transform": "translate(0.000000,179.000000) scale(0.100000,-0.100000)",
+    "animationDuration": 14
+  }
+]
