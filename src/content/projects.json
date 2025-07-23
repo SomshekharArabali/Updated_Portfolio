@@ -2,7 +2,7 @@
   {
     "id": "0",
     "title": "Online Resume Builder",
-    "image": "../images/image.png",
+    "image": "../images/real_estate.png",
     "description": "",
     "skills": ["React", "redux", "css", "html", "javascript"],
     "websiteLink": "https://aroma-internship-week-5-online-resume-builder.vercel.app/",
@@ -11,7 +11,7 @@
   {
     "id": "1",
     "title": "CICD Migration",
-    "image": "../images/cicd.png",
+    "image": "../images/real_estate.png",
     "description": "Github CI to azure CI migration",
     "skills": ["Docker", "Azure", "cloud", "DevOps", "python",".Net"],
     "githubLink": "https://github.com/SomshekharArabali/migrating-github-ci-pipelines-to-azure-ci-pipelines"

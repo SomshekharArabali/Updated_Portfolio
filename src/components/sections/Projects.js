@@ -1,271 +1,284 @@
-import { React } from "react";
-import { Typography, Container, Grid, styled } from "@mui/material";
+"use client"
 import {
-  StyledDivider,
-  StyledGenericContainer,
-  StyledGenericRoot,
-  StyledGenericSubText,
-  StyledGenericTitle,
-} from "./Styles";
-import "animate.css";
-import { useInView, InView } from "react-intersection-observer";
-import * as Scroll from "react-scroll";
-import projects from "../../content/projects.json";
-import LaunchIcon from "@mui/icons-material/Launch";
-import GitHubIcon from "@mui/icons-material/GitHub";
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Button,
+  Chip,
+  styled,
+  useTheme,
+} from "@mui/material"
+import { motion } from "framer-motion"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import LaunchIcon from "@mui/icons-material/Launch"
 
-//Component styles//
-const StyledProjectsContainer = styled(Container)(({ theme }) => ({
-  marginTop: "3rem",
+// Component styles
+const StyledProjectsSection = styled(Box)(({ theme }) => ({
+  minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
-  boxSizing: "unset !important",
-  maxWidth: "1000px !important",
-  textAlign: "center",
   justifyContent: "center",
-  [theme.breakpoints.down("sm")]: {
-    width: "85% !important",
-  },
-  [theme.breakpoints.down("xs")]: {
-    width: "90% !important",
-  },
-}));
-const StyledProjectsGrid = styled(Grid)(({ theme }) => ({
-  justifyContent: "space-around",
-  width: "100%",
-  marginLeft: "0 !important",
-  marginTop: "0 !important",
-  padding: "1rem",
-}));
-const StyledProjectsGridItem = styled(Grid)(({ theme }) => ({
+  padding: "5rem 0",
   position: "relative",
+}))
+
+const SectionTitle = styled(Typography)(({ theme }) => ({
+  position: "relative",
+  marginBottom: "3rem",
+  display: "inline-block",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: "-10px",
+    left: "0",
+    width: "60px",
+    height: "4px",
+    backgroundColor: theme.palette.textSecondary.main,
+  },
+}))
+
+const ProjectCard = styled(Card)(({ theme }) => ({
+  height: "100%",
   display: "flex",
-  height: "280px",
-  marginBottom: "2.5rem",
-  borderRadius: "1rem",
-  border: `0.25rem solid ${theme.palette.backgroundSecondary.main}70`,
-  backgroundColor: `${theme.palette.backgroundSecondary.main}70`,
-  paddingTop: "0 !important",
-  paddingLeft: "0 !important",
+  flexDirection: "column",
+  backgroundColor: theme.palette.mode === "dark" ? "rgba(28, 37, 65, 0.8)" : "rgba(255, 255, 255, 0.8)",
+  backdropFilter: "blur(10px)",
+  borderRadius: "16px",
   overflow: "hidden",
-  alignItems: "flex-end",
-  transform: "none",
-  transition: "transform 150ms ease-in-out 0s",
+  boxShadow: theme.palette.mode === "dark" ? "0 10px 30px rgba(0, 0, 0, 0.3)" : "0 10px 30px rgba(91, 192, 190, 0.1)",
+  transition: "all 0.3s ease",
+}))
+
+const ProjectMedia = styled(CardMedia)(({ theme }) => ({
+  height: "200px",
+  position: "relative",
+  overflow: "hidden",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background:
+      theme.palette.mode === "dark"
+        ? "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))"
+        : "linear-gradient(to bottom, rgba(91, 192, 190, 0.3), rgba(91, 192, 190, 0.6))",
+    opacity: 0,
+    transition: "opacity 0.3s ease",
+  },
+  "&:hover::before": {
+    opacity: 1,
+  },
+}))
+
+const ProjectContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1,
+  padding: "1.5rem",
+}))
+
+const ProjectActions = styled(CardActions)(({ theme }) => ({
+  padding: "1rem 1.5rem",
+  justifyContent: "flex-end",
+}))
+
+const TechChip = styled(Chip)(({ theme }) => ({
+  margin: "0.25rem",
+  backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.1)" : "rgba(91, 192, 190, 0.1)",
+  color: theme.palette.textSecondary.main,
+  fontWeight: 500,
   "&:hover": {
-    transform: "scale(1.02)",
-    transition: "transform 150ms ease-in-out 0s",
-    [theme.breakpoints.up("md")]: {
-      "& div": {
-        opacity: "1",
-        transform: "translateY(-10%)",
-        transition:
-          "opacity 300ms ease-in-out 0s, transform 300ms ease-in-out 0s",
+    backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.2)" : "rgba(91, 192, 190, 0.2)",
+  },
+}))
+
+const Projects = ({ setCursorVariant }) => {
+  const theme = useTheme()
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
       },
     },
-    "&::after": {
-      opacity: "0.9 !important",
-      content: "''",
-      position: "absolute",
-      inset: "0px",
+  }
 
-      background:
-        "linear-gradient(rgba(0, 0, 0, 0.1) 10%, rgba(0, 0, 0, 0.78) 70%)",
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
     },
-  },
-  [theme.breakpoints.down("md")]: {
-    maxWidth: "500px",
-    "&::after": {
-      opacity: "0.9 !important",
-      content: "''",
-      position: "absolute",
-      inset: "0px",
+  }
 
-      background:
-        "linear-gradient(rgba(0, 0, 0, 0.1) 10%, rgba(0, 0, 0, 0.78) 70%)",
+  const cardVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: (i) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    }),
+    hover: {
+      y: -10,
+      boxShadow:
+        theme.palette.mode === "dark" ? "0 20px 40px rgba(0, 0, 0, 0.4)" : "0 20px 40px rgba(91, 192, 190, 0.2)",
     },
-    "& div": {
-      opacity: "1",
-    },
-  },
-  [theme.breakpoints.down("sm")]: {
-    height: "260px !important",
-  },
-}));
-const StyledProjectsImg = styled("img")(({ theme }) => ({
-  transform: "scale(1.01)",
-  height: "100%",
-  width: "100%",
-  position: "absolute",
-  objectFit: "cover",
-}));
-const StyledProjectsTextField = styled("div")(({ theme }) => ({
-  zIndex: "1000 !important",
-  transition: "opacity 300ms ease-in-out 0s, transform 300ms ease-in-out 0s",
-  transform: "none",
-  opacity: "0",
-  padding: "0rem 1rem",
-  color: "white",
-  textAlign: "left",
-  [theme.breakpoints.down("lg")]: {
-    transform: "none",
-    padding: "1rem 1rem",
-  },
-}));
-const StyledProjectsTitle = styled(Typography)(({ theme }) => ({
-  fontSize: "1.5rem !important",
-  fontWeight: "600",
-}));
-const StyledProjectsSubText = styled(Typography)(({ theme }) => ({
-  fontSize: "1rem !important",
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.8rem !important",
-  },
-}));
-const StyledProjectsSkillContainer = styled("div")(({ theme }) => ({
-  marginTop: "0.5rem",
-  display: "flex",
-  flexWrap: "wrap",
-  rowGap: "0.4rem",
-}));
-const StyledProjectsSkillText = styled(Typography)(({ theme }) => ({
-  fontSize: "0.8rem !important",
-  background: "white",
-  marginRight: "0.5rem",
-  padding: "0.1rem 0.4rem",
-  borderRadius: "0.5rem",
-  color: "black",
-  fontWeight: "600",
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "0.7rem !important",
-  },
-}));
-const StyledProjectsOpenLink = styled("a")({
-  color: "inherit",
-  "& svg": {
-    padding: "0",
-    minWidth: "0",
-    marginTop: "0.5rem",
-    marginRight: "0.5rem",
-    transform: "none",
-    transition: "transform 200ms",
-  },
-  "&:hover": {
-    "& svg": {
-      transform: "scale(1.15)",
-    },
-  },
-});
-const StyledProjectsGHLink = styled("a")({
-  color: "inherit",
-  "& svg": {
-    padding: "0",
-    minWidth: "0",
-    marginTop: "0.43rem",
-    transform: "scale(0.90)",
-    transition: "transform 200ms",
-  },
-  "&:hover": {
-    "& svg": {
-      transform: "scale(1.15)",
-    },
-  },
-});
+  }
 
-//End component styles
-
-const Projects = () => {
-  //triggers for animations
-  const [projectsContainer, projectsContainerInView] = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
+  // Projects data from user with correct image paths
+  const projects = [
+    {
+      id: "0",
+      title: "Online Resume Builder",
+      image: "/images/image.png",
+      description:
+        "A comprehensive online resume builder that allows users to create professional resumes with multiple templates and real-time preview functionality.",
+      skills: ["React", "Redux", "CSS", "HTML", "JavaScript"],
+      websiteLink: "https://aroma-internship-week-5-online-resume-builder.vercel.app/",
+      githubLink: "https://github.com/SomshekharArabali/Aroma-Internship-week-5--online-resume-Builder",
+    },
+    {
+      id: "1",
+      title: "CI/CD Migration",
+      image: "/images/cicd.png",
+      description:
+        "Github CI to Azure CI migration project focusing on streamlining deployment processes and improving development workflow efficiency.",
+      skills: ["Docker", "Azure", "Cloud", "DevOps", "Python", ".NET"],
+      githubLink: "https://github.com/SomshekharArabali/migrating-github-ci-pipelines-to-azure-ci-pipelines",
+    },
+    {
+      id: "2",
+      title: "Responsive Starbucks Website",
+      image: "/images/starbucks.png",
+      description:
+        "A responsive Starbucks website clone with modern design, interactive menu, and seamless coffee ordering experience.",
+      skills: ["HTML", "CSS", "JavaScript"],
+      websiteLink: "https://somshekhararabali.github.io/Responsive-Starbucks-website_/",
+      githubLink: "https://github.com/SomshekharArabali/Responsive-Starbucks-website_",
+    },
+    {
+      id: "3",
+      title: "Real Estate Website",
+      image: "/images/real_estate.png",
+      description:
+        "The platform provides advanced search filters, enhancing the home-buying and renting process with intuitive user interface and comprehensive property listings.",
+      skills: ["React", "Bootstrap", "HTML", "CSS", "JavaScript"],
+      websiteLink: "https://aroma-internship-week-4.vercel.app/",
+      githubLink: "https://github.com/SomshekharArabali/Aroma-Internship-Week-4-Real-Estate-Website",
+    },
+  ]
 
   return (
-    <Scroll.Element name="Projects">
-      <StyledGenericRoot ref={projectsContainer}>
-        <StyledGenericContainer
-          sx={
-            projectsContainerInView
-              ? { visibility: "visible" }
-              : { visibility: "hidden" }
-          }
-          className={
-            projectsContainerInView ? "animate__animated animate__fadeInUp" : ""
-          }
-        >
-          <StyledGenericTitle component="h1">
-            Projects
-            <StyledDivider />
-          </StyledGenericTitle>
-          <StyledGenericSubText component="h1">
-            Here are a few of my favorite projects that I have built over the
-            past few years!
-          </StyledGenericSubText>
-        </StyledGenericContainer>
-        <StyledProjectsContainer>
-          <StyledProjectsGrid container rowSpacing={6} columnSpacing={12}>
-            {projects.map((project) => (
-              <InView key={project.id} threshold={0.9} triggerOnce={true}>
-                {({ ref, inView }) => (
-                  <StyledProjectsGridItem
-                    item
-                    xs={12}
-                    sm={5.5}
-                    ref={ref}
-                    inView={inView}
-                    sx={
-                      inView
-                        ? {
-                            visibility: "visible",
-                            animation: "fadeInUp",
-                            animationDuration: "1s",
-                          }
-                        : { visibility: "hidden" }
-                    }
-                  >
-                    <StyledProjectsImg
-                      alt={`Image of ${project.title}`}
-                      src={project.image}
-                      referrerPolicy="no-referrer"
-                    />
-                    <StyledProjectsTextField>
-                      <StyledProjectsTitle>{project.title}</StyledProjectsTitle>
-                      <StyledProjectsSubText>
-                        {project.description}
-                      </StyledProjectsSubText>
-                      <StyledProjectsSkillContainer>
-                        {project.skills.map((skill, index) => (
-                          <StyledProjectsSkillText key={index}>
-                            {skill}
-                          </StyledProjectsSkillText>
-                        ))}
-                      </StyledProjectsSkillContainer>
-                      {project.websiteLink && (
-                        <StyledProjectsOpenLink
-                          href={project.websiteLink}
-                          target="_blank"
-                        >
-                          <LaunchIcon />
-                        </StyledProjectsOpenLink>
-                      )}
-                      {project.githubLink && (
-                        <StyledProjectsGHLink
-                          href={project.githubLink}
-                          target="_blank"
-                        >
-                          <GitHubIcon />
-                        </StyledProjectsGHLink>
-                      )}
-                    </StyledProjectsTextField>
-                  </StyledProjectsGridItem>
-                )}
-              </InView>
-            ))}
-          </StyledProjectsGrid>
-        </StyledProjectsContainer>
-      </StyledGenericRoot>
-    </Scroll.Element>
-  );
-};
+    <StyledProjectsSection id="Projects">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <motion.div variants={itemVariants}>
+          <SectionTitle variant="h2" color="textMain.main">
+            Things I've Built
+          </SectionTitle>
+        </motion.div>
 
-export default Projects;
+        <Grid container spacing={4}>
+          {projects.map((project, index) => (
+            <Grid item xs={12} sm={6} md={6} key={project.id}>
+              <motion.div
+                custom={index}
+                variants={cardVariants}
+                whileHover="hover"
+                onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
+                onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
+              >
+                <ProjectCard>
+                  <ProjectMedia
+                    component={motion.div}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    image={project.image}
+                    title={project.title}
+                  />
+                  <ProjectContent>
+                    <Typography variant="h5" component="h3" color="textMain.main" gutterBottom sx={{ fontWeight: 600 }}>
+                      {project.title}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary.main" sx={{ mb: 2 }}>
+                      {project.description}
+                    </Typography>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                      {project.skills.map((tech) => (
+                        <TechChip
+                          key={tech}
+                          label={tech}
+                          size="small"
+                          component={motion.div}
+                          whileHover={{ scale: 1.1 }}
+                        />
+                      ))}
+                    </Box>
+                  </ProjectContent>
+                  <ProjectActions>
+                    <Button
+                      size="small"
+                      startIcon={<GitHubIcon />}
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        color: theme.palette.textMain.main,
+                        "&:hover": {
+                          color: theme.palette.textSecondary.main,
+                        },
+                      }}
+                    >
+                      Code
+                    </Button>
+                    {project.websiteLink && (
+                      <Button
+                        size="small"
+                        startIcon={<LaunchIcon />}
+                        href={project.websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          color: theme.palette.textMain.main,
+                          "&:hover": {
+                            color: theme.palette.textSecondary.main,
+                          },
+                        }}
+                      >
+                        Demo
+                      </Button>
+                    )}
+                  </ProjectActions>
+                </ProjectCard>
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
+      </motion.div>
+    </StyledProjectsSection>
+  )
+}
+
+export default Projects

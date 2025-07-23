@@ -1,60 +1,111 @@
-import React, { useEffect, useState } from "react";
-import { Typography, styled } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import "animate.css";
+"use client"
 
-//Component styles//
-const Styled404Root = styled("section")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100%",
-  width: "100%",
-  position: "fixed",
-  backgroundColor: theme.palette.background.main,
-}));
-const Styled404Container = styled("div")(({ fadeOut }) => ({
-  animation: fadeOut ? "fadeOut" : "fadeIn",
-  animationDuration: "1s",
-  textAlign: "center",
-}));
-const Styled404Text = styled(Typography)(({ theme }) => ({
-  color: theme.palette.textSecondary.main,
-  fontSize: "clamp(100px, 25vw, 200px)",
-  fontWeight: "600",
-}));
-const Styled404SubText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.textMain.main,
-  fontSize: "clamp(20px, 3vw, 30px)",
-  marginTop: "-2rem",
-}));
-
-//End component style//
+import { useContext } from "react"
+import { Container, Typography, Button, Box, useTheme, useMediaQuery } from "@mui/material"
+import { Home, ArrowBack } from "@mui/icons-material"
+import { useNavigate } from "react-router-dom"
+import { ThemeContext } from "../ThemeContext"
 
 const NotFound404 = () => {
-  const [fadeOut, setFadeOut] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const reloadPageTimer = setTimeout(() => {
-      navigate("/");
-    }, 2900);
-
-    setTimeout(() => {
-      setFadeOut(true);
-    }, 2000);
-
-    return () => clearTimeout(reloadPageTimer);
-  }, [navigate]);
+  const navigate = useNavigate()
+  const { theme } = useContext(ThemeContext)
+  const muiTheme = useTheme()
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"))
 
   return (
-    <Styled404Root>
-      <Styled404Container fadeOut={fadeOut}>
-        <Styled404Text>404</Styled404Text>
-        <Styled404SubText>Page Not Found :&#40;</Styled404SubText>
-      </Styled404Container>
-    </Styled404Root>
-  );
-};
+    <Box
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "background.default",
+        color: "text.primary",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Container maxWidth="sm">
+        <Box
+          sx={{
+            textAlign: "center",
+            py: { xs: 4, md: 8 },
+          }}
+        >
+          <Typography
+            variant={isMobile ? "h2" : "h1"}
+            component="h1"
+            sx={{
+              fontWeight: "bold",
+              mb: 2,
+              fontSize: { xs: "4rem", sm: "6rem", md: "8rem" },
+              color: "primary.main",
+            }}
+          >
+            404
+          </Typography>
 
-export default NotFound404;
+          <Typography variant={isMobile ? "h5" : "h4"} component="h2" gutterBottom sx={{ mb: 2 }}>
+            Page Not Found
+          </Typography>
+
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{
+              mb: 4,
+              fontSize: { xs: "1rem", sm: "1.1rem" },
+              lineHeight: 1.6,
+            }}
+          >
+            The page you're looking for doesn't exist or has been moved.
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: 2,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              variant="contained"
+              startIcon={<Home />}
+              onClick={() => navigate("/")}
+              size={isMobile ? "medium" : "large"}
+              sx={{
+                px: { xs: 3, sm: 4 },
+                backgroundColor: "primary.main",
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                },
+              }}
+            >
+              Go Home
+            </Button>
+
+            <Button
+              variant="outlined"
+              startIcon={<ArrowBack />}
+              onClick={() => navigate(-1)}
+              size={isMobile ? "medium" : "large"}
+              sx={{
+                px: { xs: 3, sm: 4 },
+                borderColor: "primary.main",
+                color: "primary.main",
+                "&:hover": {
+                  borderColor: "secondary.main",
+                  backgroundColor: "rgba(94, 192, 190, 0.1)",
+                },
+              }}
+            >
+              Go Back
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
+
+export default NotFound404

@@ -1,64 +1,103 @@
-import { React } from "react";
-import {
-  CubeSvgPath,
-  emailSvgPath,
-  githubSvgPath,
-  linkedInSvgPath,
-  rocketLeagueSvgPath,
-  UTRSvgPath,
-} from "./SvgHelper";
-import { styled } from "@mui/material";
-import { useTheme } from "@mui/material";
+"use client"
+import { emailSvgPath, githubSvgPath, linkedInSvgPath } from "./SvgHelper"
+import { styled } from "@mui/material"
+import { useTheme } from "@mui/material"
+import { motion } from "framer-motion"
 
-//Component Styles//
-const StyledAnchorLink = styled("a")(({ theme }) => ({
+// Component Styles
+const StyledAnchorLink = styled(motion.a)(({ theme }) => ({
   "& svg": {
     width: "2.2rem",
     cursor: "pointer",
-    transition: "transform 0.2s ease-in-out",
+    transition: "all 0.3s ease",
     transform: "none",
   },
   "&:hover": {
     "& svg": {
       fill: theme.palette.textSecondary.main + " !important",
-      transform: "scale(1.2)",
     },
   },
-}));
+  marginBottom: "1.5rem",
+}))
 
-const StyledLeftAnchor = styled("div")({
+const StyledLeftAnchor = styled(motion.div)({
   width: "40px",
   position: "fixed",
   bottom: "16vh",
   left: "50px",
   right: "auto",
-  Zndex: "10",
-  animation: "fadeInLeft",
-  animationDuration: "1s",
-});
+  zIndex: "10",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  "&::after": {
+    content: '""',
+    display: "block",
+    width: "1px",
+    height: "90px",
+    margin: "0 auto",
+    backgroundColor: "currentColor",
+  },
+})
 
-const StyledRightAnchor = styled("div")({
+const StyledRightAnchor = styled(motion.div)({
   width: "40px",
   position: "fixed",
   bottom: "16vh",
   left: "auto",
   right: "50px",
-  Zndex: "10",
-  animation: "fadeInRight",
-  animationDuration: "1s",
-});
-//End component styles//
+  zIndex: "10",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  "&::after": {
+    content: '""',
+    display: "block",
+    width: "1px",
+    height: "90px",
+    margin: "0 auto",
+    backgroundColor: "currentColor",
+  },
+})
 
 const SideAnchorLinks = () => {
-  const theme = useTheme();
+  const theme = useTheme()
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+        delay: 1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { x: -50, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+      },
+    },
+  }
 
   return (
     <>
-      <StyledLeftAnchor>
+      <StyledLeftAnchor variants={containerVariants} initial="hidden" animate="visible">
         <StyledAnchorLink
           href="https://www.linkedin.com/in/somshekhar-arabali-167651259/"
           target="_blank"
           aria-label="LinkedIn"
+          variants={itemVariants}
+          whileHover={{ y: -5, scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
           <svg
             fill={theme.palette.textMain.main}
@@ -76,6 +115,9 @@ const SideAnchorLinks = () => {
           href="https://github.com/SomshekharArabali"
           target="_blank"
           aria-label="Github"
+          variants={itemVariants}
+          whileHover={{ y: -5, scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +134,9 @@ const SideAnchorLinks = () => {
         <StyledAnchorLink
           href="mailto:omie9284@gmail.com"
           sx={{ transform: "scale(0.90)" }}
+          variants={itemVariants}
+          whileHover={{ y: -5, scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
           <svg
             fill={theme.palette.textMain.main}
@@ -111,9 +156,8 @@ const SideAnchorLinks = () => {
           </svg>
         </StyledAnchorLink>
       </StyledLeftAnchor>
-      
     </>
-  );
-};
+  )
+}
 
-export default SideAnchorLinks;
+export default SideAnchorLinks

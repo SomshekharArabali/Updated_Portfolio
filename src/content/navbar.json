@@ -1,18 +1,30 @@
 [
   {
-    "id": "0",
+    "id": 1,
+    "name": "Home"
+  },
+  {
+    "id": 2,
     "name": "About"
   },
   {
-    "id": "1",
+    "id": 3,
+    "name": "Certifications"
+  },
+  {
+    "id": 4,
     "name": "Experience"
   },
   {
-    "id": "2",
+    "id": 5,
     "name": "Projects"
   },
   {
-    "id": "3",
+    "id": 6,
     "name": "Hobbies"
+  },
+  {
+    "id": 7,
+    "name": "Contact"
   }
 ]
