@@ -45,10 +45,7 @@ const HeroImage = styled(motion.img)(({ theme }) => ({
 }))
 
 const GradientText = styled(Typography)(({ theme }) => ({
-  background:
-    theme.palette.mode === "dark"
-      ? "linear-gradient(to right, #6FFFE9, #5BC0BE)"
-      : "linear-gradient(to right, #0B132B, #3A506B)",
+  background: "linear-gradient(to right, #6FFFE9, #5BC0BE)", // Always use dark theme gradient
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   fontWeight: 700,

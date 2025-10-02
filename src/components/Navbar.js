@@ -4,8 +4,6 @@ import { useState, useEffect, useContext } from "react"
 import { ThemeContext } from "../ThemeContext"
 import navbarData from "../content/navbar.json"
 import MenuIcon from "@mui/icons-material/Menu"
-import WbSunnyIcon from "@mui/icons-material/WbSunny"
-import DarkModeIcon from "@mui/icons-material/DarkMode"
 import CloseIcon from "@mui/icons-material/Close"
 import {
   Button,
@@ -44,8 +42,8 @@ const StyledAppBar = styled(AppBar)(({ theme, isScrolled }) => ({
   boxShadow: isScrolled ? "0 10px 30px -10px rgba(0, 0, 0, 0.3) !important" : "none !important",
   backdropFilter: isScrolled ? "blur(10px)" : "none",
   backgroundColor: isScrolled
-    ? `${theme.palette.background.main}CC !important` // Add transparency
-    : theme.palette.background.main + " !important",
+    ? `${theme.palette.background.default}CC !important` // Use dark theme default background
+    : theme.palette.background.default + " !important",
   padding: isScrolled ? "0.5rem 5rem 0.5rem 5rem" : "2rem 5rem 2rem 5rem",
   [theme.breakpoints.down("sm")]: {
     padding: isScrolled ? "0.5rem 2rem 0.5rem 2rem" : "1rem 2rem 1rem 2rem",
@@ -160,13 +158,13 @@ const Logo = styled(motion.div)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   "& svg": {
-    width: "40px",
-    height: "40px",
+    width: "100px", /* Increased width */
+    height: "100px", /* Increased height */
   },
 }))
 
 const Navbar = () => {
-  const { theme, setTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext) // Removed setTheme
   const [hasAnimated, setHasAnimated] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -192,14 +190,11 @@ const Navbar = () => {
     }
     window.addEventListener("scroll", handleScroll)
     return () => {
-      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("mousemove", handleScroll) // Fixed: changed mousemove to scroll
     }
   }, [])
 
-  // Save the user's selected color theme choice
-  useEffect(() => {
-    window.localStorage.setItem("theme", theme)
-  }, [theme])
+  // Removed useEffect for persisting theme as it's always dark
 
   // Hide the AppBar when scrolling down
   const trigger = useScrollTrigger({
@@ -330,20 +325,6 @@ const Navbar = () => {
               </StyledDrawerList>
             ))}
           </AnimatePresence>
-
-          <List>
-            <Button
-              sx={{
-                color: MuiTheme.palette.textMain.main,
-              }}
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              component={motion.button}
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {theme === "light" ? <WbSunnyIcon /> : <DarkModeIcon />}
-            </Button>
-          </List>
         </Box>
       </StyledDrawer>
     </>
@@ -351,21 +332,7 @@ const Navbar = () => {
 
   const navbar = (
     <>
-      <motion.div
-        initial={!hasAnimated ? { y: -20, opacity: 0 } : false}
-        animate={!hasAnimated ? { y: 0, opacity: 1 } : false}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        <StyledAppBarButton
-          aria-label="Change theme"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          component={motion.button}
-          whileHover={{ scale: 1.1, rotate: 180 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          {theme === "light" ? <WbSunnyIcon /> : <DarkModeIcon />}
-        </StyledAppBarButton>
-      </motion.div>
+      {/* Removed theme toggle button */}
 
       {navbarData.map((data, index) => (
         <motion.div
@@ -405,11 +372,12 @@ const Navbar = () => {
         <StyledAppBarContainer>
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <Logo variants={logoVariants} initial="hidden" animate="visible" whileHover="hover">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 64 64">
                 <defs>
                   <linearGradient id="navLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor={theme === "light" ? "#5BC0BE" : "#6FFFE9"} />
-                    <stop offset="100%" stopColor={theme === "light" ? "#3E9F9D" : "#5BC0BE"} />
+                    {/* Always use dark theme colors */}
+                    <stop offset="0%" stopColor="#6FFFE9" />
+                    <stop offset="100%" stopColor="#5BC0BE" />
                   </linearGradient>
                 </defs>
                 <path

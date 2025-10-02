@@ -38,7 +38,7 @@ const TabsContainer = styled(Box)(({ theme }) => ({
 }))
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({
-  borderRight: `1px solid ${theme.palette.mode === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}`,
+  borderRight: `1px solid rgba(255, 255, 255, 0.1)`, // Always use dark theme value
   minWidth: "200px",
   "& .MuiTabs-indicator": {
     left: 0,
@@ -48,7 +48,7 @@ const StyledTabs = styled(Tabs)(({ theme }) => ({
   },
   [theme.breakpoints.down("md")]: {
     borderRight: "none",
-    borderBottom: `1px solid ${theme.palette.mode === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}`,
+    borderBottom: `1px solid rgba(255, 255, 255, 0.1)`, // Always use dark theme value
     minWidth: "auto",
     "& .MuiTabs-indicator": {
       left: "auto",
@@ -72,7 +72,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
   "&:hover": {
     color: theme.palette.textSecondary.main,
-    backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.05)" : "rgba(91, 192, 190, 0.05)",
+    backgroundColor: "rgba(111, 255, 233, 0.05)", // Always use dark theme value
   },
   [theme.breakpoints.down("md")]: {
     alignItems: "center",
@@ -119,7 +119,7 @@ const TechStack = styled(Box)(({ theme }) => ({
 const TechChip = styled(Box)(({ theme }) => ({
   padding: "0.25rem 0.75rem",
   borderRadius: "12px",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.1)" : "rgba(91, 192, 190, 0.1)",
+  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
   color: theme.palette.textSecondary.main,
   fontSize: "0.8rem",
   fontWeight: 500,
@@ -196,7 +196,7 @@ const Experience = ({ setCursorVariant }) => {
     
    
     {
-  company: "Aroma Internship",
+  company: "Aroma Brand Solutions",
   title: "Software Development Intern",
   date: "January 2020 – July 2020",
   location: "Pune, Maharashtra",

@@ -11,10 +11,15 @@ import {
   Chip,
   styled,
   useTheme,
+  Tabs,
+  Tab,
+  useMediaQuery,
 } from "@mui/material"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import LaunchIcon from "@mui/icons-material/Launch"
+import projectsData from "../../content/projects.json" // Import project data
+import { useState } from "react" // Import useState
 
 // Component styles
 const StyledProjectsSection = styled(Box)(({ theme }) => ({
@@ -45,11 +50,11 @@ const ProjectCard = styled(Card)(({ theme }) => ({
   height: "100%",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(28, 37, 65, 0.8)" : "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "rgba(28, 37, 65, 0.8)", // Always use dark theme value
   backdropFilter: "blur(10px)",
   borderRadius: "16px",
   overflow: "hidden",
-  boxShadow: theme.palette.mode === "dark" ? "0 10px 30px rgba(0, 0, 0, 0.3)" : "0 10px 30px rgba(91, 192, 190, 0.1)",
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)", // Always use dark theme value
   transition: "all 0.3s ease",
 }))
 
@@ -57,8 +62,11 @@ const ProjectMedia = styled(CardMedia)(({ theme }) => ({
   height: "200px",
   position: "relative",
   overflow: "hidden",
-  backgroundSize: "cover",
+  backgroundSize: "contain", /* Changed from 'cover' to 'contain' */
   backgroundPosition: "center",
+  backgroundRepeat: "no-repeat", /* Ensure image doesn't repeat */
+  backgroundColor: "rgba(11, 19, 43, 0.7)", /* Added a background color for consistency */
+  padding: "1rem", /* Added padding to give images some breathing room */
   "&::before": {
     content: '""',
     position: "absolute",
@@ -66,10 +74,7 @@ const ProjectMedia = styled(CardMedia)(({ theme }) => ({
     left: 0,
     width: "100%",
     height: "100%",
-    background:
-      theme.palette.mode === "dark"
-        ? "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))"
-        : "linear-gradient(to bottom, rgba(91, 192, 190, 0.3), rgba(91, 192, 190, 0.6))",
+    background: "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))", // Always use dark theme gradient
     opacity: 0,
     transition: "opacity 0.3s ease",
   },
@@ -90,16 +95,66 @@ const ProjectActions = styled(CardActions)(({ theme }) => ({
 
 const TechChip = styled(Chip)(({ theme }) => ({
   margin: "0.25rem",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.1)" : "rgba(91, 192, 190, 0.1)",
+  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
   color: theme.palette.textSecondary.main,
   fontWeight: 500,
   "&:hover": {
-    backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.2)" : "rgba(91, 192, 190, 0.2)",
+    backgroundColor: "rgba(111, 255, 233, 0.2)", // Always use dark theme value
   },
 }))
 
+const StyledTabs = styled(Tabs)(({ theme }) => ({
+  marginBottom: "2rem",
+  "& .MuiTabs-indicator": {
+    backgroundColor: theme.palette.textSecondary.main,
+  },
+}))
+
+const StyledTab = styled(Tab)(({ theme }) => ({
+  color: theme.palette.textMain.main,
+  opacity: 0.7,
+  "&.Mui-selected": {
+    color: theme.palette.textSecondary.main,
+    opacity: 1,
+  },
+  "&:hover": {
+    color: theme.palette.textSecondary.main,
+    backgroundColor: "rgba(111, 255, 233, 0.05)",
+  },
+}))
+
+const TabPanel = (props) => {
+  const { children, value, index, ...other } = props
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`project-tabpanel-${index}`}
+      aria-labelledby={`project-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  )
+}
+
 const Projects = ({ setCursorVariant }) => {
   const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
+  const [selectedCategory, setSelectedCategory] = useState(0) // 0 for All, 1 for Cloud, 2 for Full Stack, 3 for Java
+
+  const categories = ["All", "Cloud Solutions", "Full Stack Development", "Java Development"]
+
+  const handleCategoryChange = (event, newValue) => {
+    setSelectedCategory(newValue)
+  }
+
+  const filteredProjects = projectsData.filter((project) => {
+    if (selectedCategory === 0) {
+      return true // Show all projects
+    }
+    return project.category === categories[selectedCategory]
+  })
 
   // Animation variants
   const containerVariants = {
@@ -138,53 +193,9 @@ const Projects = ({ setCursorVariant }) => {
     }),
     hover: {
       y: -10,
-      boxShadow:
-        theme.palette.mode === "dark" ? "0 20px 40px rgba(0, 0, 0, 0.4)" : "0 20px 40px rgba(91, 192, 190, 0.2)",
+      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)", // Always use dark theme value
     },
   }
-
-  // Projects data from user with correct image paths
-  const projects = [
-    {
-      id: "0",
-      title: "Online Resume Builder",
-      image: "/images/image.png",
-      description:
-        "A comprehensive online resume builder that allows users to create professional resumes with multiple templates and real-time preview functionality.",
-      skills: ["React", "Redux", "CSS", "HTML", "JavaScript"],
-      websiteLink: "https://aroma-internship-week-5-online-resume-builder.vercel.app/",
-      githubLink: "https://github.com/SomshekharArabali/Aroma-Internship-week-5--online-resume-Builder",
-    },
-    {
-      id: "1",
-      title: "CI/CD Migration",
-      image: "/images/cicd.png",
-      description:
-        "Github CI to Azure CI migration project focusing on streamlining deployment processes and improving development workflow efficiency.",
-      skills: ["Docker", "Azure", "Cloud", "DevOps", "Python", ".NET"],
-      githubLink: "https://github.com/SomshekharArabali/migrating-github-ci-pipelines-to-azure-ci-pipelines",
-    },
-    {
-      id: "2",
-      title: "Responsive Starbucks Website",
-      image: "/images/starbucks.png",
-      description:
-        "A responsive Starbucks website clone with modern design, interactive menu, and seamless coffee ordering experience.",
-      skills: ["HTML", "CSS", "JavaScript"],
-      websiteLink: "https://somshekhararabali.github.io/Responsive-Starbucks-website_/",
-      githubLink: "https://github.com/SomshekharArabali/Responsive-Starbucks-website_",
-    },
-    {
-      id: "3",
-      title: "Real Estate Website",
-      image: "/images/real_estate.png",
-      description:
-        "The platform provides advanced search filters, enhancing the home-buying and renting process with intuitive user interface and comprehensive property listings.",
-      skills: ["React", "Bootstrap", "HTML", "CSS", "JavaScript"],
-      websiteLink: "https://aroma-internship-week-4.vercel.app/",
-      githubLink: "https://github.com/SomshekharArabali/Aroma-Internship-Week-4-Real-Estate-Website",
-    },
-  ]
 
   return (
     <StyledProjectsSection id="Projects">
@@ -200,82 +211,113 @@ const Projects = ({ setCursorVariant }) => {
           </SectionTitle>
         </motion.div>
 
-        <Grid container spacing={4}>
-          {projects.map((project, index) => (
-            <Grid item xs={12} sm={6} md={6} key={project.id}>
-              <motion.div
-                custom={index}
-                variants={cardVariants}
-                whileHover="hover"
-                onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
-                onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
-              >
-                <ProjectCard>
-                  <ProjectMedia
-                    component={motion.div}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                    image={project.image}
-                    title={project.title}
-                  />
-                  <ProjectContent>
-                    <Typography variant="h5" component="h3" color="textMain.main" gutterBottom sx={{ fontWeight: 600 }}>
-                      {project.title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary.main" sx={{ mb: 2 }}>
-                      {project.description}
-                    </Typography>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
-                      {project.skills.map((tech) => (
-                        <TechChip
-                          key={tech}
-                          label={tech}
-                          size="small"
-                          component={motion.div}
-                          whileHover={{ scale: 1.1 }}
-                        />
-                      ))}
-                    </Box>
-                  </ProjectContent>
-                  <ProjectActions>
-                    <Button
-                      size="small"
-                      startIcon={<GitHubIcon />}
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        color: theme.palette.textMain.main,
-                        "&:hover": {
-                          color: theme.palette.textSecondary.main,
-                        },
-                      }}
-                    >
-                      Code
-                    </Button>
-                    {project.websiteLink && (
-                      <Button
-                        size="small"
-                        startIcon={<LaunchIcon />}
-                        href={project.websiteLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          color: theme.palette.textMain.main,
-                          "&:hover": {
-                            color: theme.palette.textSecondary.main,
-                          },
-                        }}
+        <motion.div variants={itemVariants}>
+          <StyledTabs
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            centered={!isMobile}
+            variant={isMobile ? "scrollable" : "standard"}
+            scrollButtons="auto"
+            aria-label="project categories tabs"
+          >
+            {categories.map((category, index) => (
+              <StyledTab key={category} label={category} />
+            ))}
+          </StyledTabs>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {categories.map((category, index) => (
+            <TabPanel value={selectedCategory} index={index} key={category}>
+              <Grid container spacing={4}>
+                {filteredProjects
+                  .filter((project) => (index === 0 ? true : project.category === category))
+                  .map((project, projectIndex) => (
+                    <Grid item xs={12} sm={6} md={6} key={project.id}>
+                      <motion.div
+                        custom={projectIndex}
+                        variants={cardVariants}
+                        whileHover="hover"
+                        onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
+                        onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
                       >
-                        Demo
-                      </Button>
-                    )}
-                  </ProjectActions>
-                </ProjectCard>
-              </motion.div>
-            </Grid>
+                        <ProjectCard>
+                          <ProjectMedia
+                            component={motion.div}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.3 }}
+                            image={project.image}
+                            title={project.title}
+                          />
+                          <ProjectContent>
+                            <Typography
+                              variant="h5"
+                              component="h3"
+                              color="textMain.main"
+                              gutterBottom
+                              sx={{ fontWeight: 600 }}
+                            >
+                              {project.title}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary.main" sx={{ mb: 2 }}>
+                              {project.description}
+                            </Typography>
+                            <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                              {project.skills.map((tech) => (
+                                <TechChip
+                                  key={tech}
+                                  label={tech}
+                                  size="small"
+                                  component={motion.div}
+                                  whileHover={{ scale: 1.1 }}
+                                />
+                              ))}
+                            </Box>
+                          </ProjectContent>
+                          <ProjectActions>
+                            {project.category !== "Cloud Solutions" && project.githubLink && (
+                              <Button
+                                size="small"
+                                startIcon={<GitHubIcon />}
+                                href={project.githubLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                sx={{
+                                  color: theme.palette.textMain.main,
+                                  "&:hover": {
+                                    color: theme.palette.textSecondary.main,
+                                  },
+                                }}
+                              >
+                                Code
+                              </Button>
+                            )}
+                            {project.websiteLink && (
+                              <Button
+                                size="small"
+                                startIcon={<LaunchIcon />}
+                                href={project.websiteLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                sx={{
+                                  color: theme.palette.textMain.main,
+                                  "&:hover": {
+                                    color: theme.palette.textSecondary.main,
+                                  },
+                                }}
+                              >
+                                Demo
+                              </Button>
+                            )}
+                          </ProjectActions>
+                        </ProjectCard>
+                      </motion.div>
+                    </Grid>
+                  ))}
+              </Grid>
+            </TabPanel>
           ))}
-        </Grid>
+        </AnimatePresence>
       </motion.div>
     </StyledProjectsSection>
   )

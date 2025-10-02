@@ -18,7 +18,7 @@ import {
 } from "../components"
 
 const StyledMainPage = styled(motion.div)(({ theme }) => ({
-  backgroundColor: theme.palette.background.main,
+  backgroundColor: theme.palette.background.default, // Use dark theme default background
   overflow: "hidden",
   position: "relative",
 }))
@@ -37,10 +37,7 @@ const BackgroundGradient = styled(motion.div)(({ theme }) => ({
   width: "30vw",
   height: "30vw",
   borderRadius: "50%",
-  background:
-    theme.palette.mode === "dark"
-      ? "radial-gradient(circle, rgba(111,255,233,0.1) 0%, rgba(91,192,190,0.05) 50%, rgba(0,0,0,0) 70%)"
-      : "radial-gradient(circle, rgba(91,192,190,0.1) 0%, rgba(62,159,157,0.05) 50%, rgba(0,0,0,0) 70%)",
+  background: "radial-gradient(circle, rgba(111,255,233,0.1) 0%, rgba(91,192,190,0.05) 50%, rgba(0,0,0,0) 70%)", // Always use dark theme gradient
   filter: "blur(40px)",
   zIndex: 0,
 }))
@@ -52,10 +49,7 @@ const BackgroundGradient2 = styled(motion.div)(({ theme }) => ({
   width: "25vw",
   height: "25vw",
   borderRadius: "50%",
-  background:
-    theme.palette.mode === "dark"
-      ? "radial-gradient(circle, rgba(58,80,107,0.1) 0%, rgba(83,115,154,0.05) 50%, rgba(0,0,0,0) 70%)"
-      : "radial-gradient(circle, rgba(11,19,43,0.1) 0%, rgba(28,37,65,0.05) 50%, rgba(0,0,0,0) 70%)",
+  background: "radial-gradient(circle, rgba(58,80,107,0.1) 0%, rgba(83,115,154,0.05) 50%, rgba(0,0,0,0) 70%)", // Always use dark theme gradient
   filter: "blur(40px)",
   zIndex: 0,
 }))
@@ -69,7 +63,7 @@ const CursorFollower = styled(motion.div)(({ theme }) => ({
   pointerEvents: "none",
   zIndex: 9999,
   mixBlendMode: "difference",
-  backgroundColor: theme.palette.mode === "dark" ? "#6FFFE9" : "#5BC0BE",
+  backgroundColor: "#6FFFE9", // Always use dark theme accent color
   opacity: 0.5,
 }))
 

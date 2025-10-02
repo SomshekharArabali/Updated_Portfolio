@@ -44,10 +44,10 @@ const HobbyCard = styled(Card)(({ theme }) => ({
   alignItems: "center",
   textAlign: "center",
   padding: "2rem",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(28, 37, 65, 0.8)" : "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "rgba(28, 37, 65, 0.8)", // Always use dark theme value
   backdropFilter: "blur(10px)",
   borderRadius: "16px",
-  boxShadow: theme.palette.mode === "dark" ? "0 10px 30px rgba(0, 0, 0, 0.3)" : "0 10px 30px rgba(91, 192, 190, 0.1)",
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)", // Always use dark theme value
   transition: "all 0.3s ease",
 }))
 
@@ -103,8 +103,7 @@ const Hobbies = ({ setCursorVariant }) => {
     }),
     hover: {
       y: -10,
-      boxShadow:
-        theme.palette.mode === "dark" ? "0 20px 40px rgba(0, 0, 0, 0.4)" : "0 20px 40px rgba(91, 192, 190, 0.2)",
+      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)", // Always use dark theme value
     },
   }
 

@@ -100,7 +100,7 @@ const SideAnchorLinks = () => {
           whileTap={{ scale: 0.95 }}
         >
           <svg
-            fill={theme.palette.textMain.main}
+            fill={theme.palette.textMain.main} // Always use dark theme main text color
             width="44px"
             height="44px"
             viewBox="-5.5 0 32 32"
@@ -125,7 +125,7 @@ const SideAnchorLinks = () => {
             width="44px"
             height="44px"
             fillRule="evenodd"
-            fill={theme.palette.textMain.main}
+            fill={theme.palette.textMain.main} // Always use dark theme main text color
           >
             <title>Github</title>
             <path fillRule="evenodd" d={githubSvgPath} />
@@ -139,7 +139,7 @@ const SideAnchorLinks = () => {
           whileTap={{ scale: 0.95 }}
         >
           <svg
-            fill={theme.palette.textMain.main}
+            fill={theme.palette.textMain.main} // Always use dark theme main text color
             height="44px"
             width="44px"
             version="1.1"

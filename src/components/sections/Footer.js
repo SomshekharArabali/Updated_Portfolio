@@ -45,9 +45,7 @@ const FooterWave = styled(Box)(({ theme }) => ({
     height: "150px",
   },
   "& .shape-fill": {
-    fill: theme.palette.mode === "dark"
-      ? "rgba(58, 80, 107, 0.2)"
-      : "rgba(91, 192, 190, 0.2)",
+    fill: "rgba(58, 80, 107, 0.2)", // Always use dark theme value
   },
 }))
 
@@ -119,9 +117,7 @@ const Footer = ({ setCursorVariant }) => {
               sx={{
                 mb: 2,
                 fontWeight: 700,
-                background: theme.palette.mode === "dark"
-                  ? "linear-gradient(to right, #6FFFE9, #5BC0BE)"
-                  : "linear-gradient(to right, #0B132B, #3A506B)",
+                background: "linear-gradient(to right, #6FFFE9, #5BC0BE)", // Always use dark theme gradient
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -158,13 +154,9 @@ const Footer = ({ setCursorVariant }) => {
                 onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
                 sx={{
                   color: theme.palette.textSecondary.main,
-                  backgroundColor: theme.palette.mode === "dark"
-                    ? "rgba(111, 255, 233, 0.1)"
-                    : "rgba(91, 192, 190, 0.1)",
+                  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
                   "&:hover": {
-                    backgroundColor: theme.palette.mode === "dark"
-                      ? "rgba(111, 255, 233, 0.2)"
-                      : "rgba(91, 192, 190, 0.2)",
+                    backgroundColor: "rgba(111, 255, 233, 0.2)", // Always use dark theme value
                   },
                 }}
               >
@@ -183,13 +175,9 @@ const Footer = ({ setCursorVariant }) => {
                 onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
                 sx={{
                   color: theme.palette.textSecondary.main,
-                  backgroundColor: theme.palette.mode === "dark"
-                    ? "rgba(111, 255, 233, 0.1)"
-                    : "rgba(91, 192, 190, 0.1)",
+                  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
                   "&:hover": {
-                    backgroundColor: theme.palette.mode === "dark"
-                      ? "rgba(111, 255, 233, 0.2)"
-                      : "rgba(91, 192, 190, 0.2)",
+                    backgroundColor: "rgba(111, 255, 233, 0.2)", // Always use dark theme value
                   },
                 }}
               >
@@ -206,13 +194,9 @@ const Footer = ({ setCursorVariant }) => {
                 onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
                 sx={{
                   color: theme.palette.textSecondary.main,
-                  backgroundColor: theme.palette.mode === "dark"
-                    ? "rgba(111, 255, 233, 0.1)"
-                    : "rgba(91, 192, 190, 0.1)",
+                  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
                   "&:hover": {
-                    backgroundColor: theme.palette.mode === "dark"
-                      ? "rgba(111, 255, 233, 0.2)"
-                      : "rgba(91, 192, 190, 0.2)",
+                    backgroundColor: "rgba(111, 255, 233, 0.2)", // Always use dark theme value
                   },
                 }}
               >

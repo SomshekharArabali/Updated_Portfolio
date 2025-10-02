@@ -32,11 +32,11 @@ const CertificationCard = styled(Card)(({ theme }) => ({
   height: "100%",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(28, 37, 65, 0.8)" : "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "rgba(28, 37, 65, 0.8)", // Always use dark theme value
   backdropFilter: "blur(10px)",
   borderRadius: "16px",
   overflow: "hidden",
-  boxShadow: theme.palette.mode === "dark" ? "0 10px 30px rgba(0, 0, 0, 0.3)" : "0 10px 30px rgba(91, 192, 190, 0.1)",
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)", // Always use dark theme value
   transition: "all 0.3s ease",
 }))
 
@@ -47,7 +47,7 @@ const CertificationMedia = styled(CardMedia)(({ theme }) => ({
   backgroundSize: "contain",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(11, 19, 43, 0.7)" : "rgba(248, 249, 250, 0.7)",
+  backgroundColor: "rgba(11, 19, 43, 0.7)", // Always use dark theme value
   padding: "1rem",
   "&::before": {
     content: '""',
@@ -56,10 +56,7 @@ const CertificationMedia = styled(CardMedia)(({ theme }) => ({
     left: 0,
     width: "100%",
     height: "100%",
-    background:
-      theme.palette.mode === "dark"
-        ? "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))"
-        : "linear-gradient(to bottom, rgba(91, 192, 190, 0.3), rgba(91, 192, 190, 0.6))",
+    background: "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))", // Always use dark theme gradient
     opacity: 0,
     transition: "opacity 0.3s ease",
   },
@@ -80,7 +77,7 @@ const CertificationDate = styled(Typography)(({ theme }) => ({
   marginTop: "0.5rem",
   color: theme.palette.textSecondary.main,
   "& svg": {
-    color: theme.palette.mode === "dark" ? "#6FFFE9" : "#5BC0BE",
+    color: "#6FFFE9", // Always use dark theme accent color
   },
 }))
 
@@ -124,8 +121,7 @@ const Certifications = ({ setCursorVariant }) => {
     }),
     hover: {
       y: -10,
-      boxShadow:
-        theme.palette.mode === "dark" ? "0 20px 40px rgba(0, 0, 0, 0.4)" : "0 20px 40px rgba(91, 192, 190, 0.2)",
+      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)", // Always use dark theme value
     },
   }
 

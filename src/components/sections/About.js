@@ -37,14 +37,14 @@ const SkillCard = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   textAlign: "center",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(58, 80, 107, 0.2)" : "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "rgba(58, 80, 107, 0.2)", // Always use dark theme value
   backdropFilter: "blur(10px)",
   borderRadius: "16px",
-  boxShadow: theme.palette.mode === "dark" ? "0 10px 30px rgba(0, 0, 0, 0.3)" : "0 10px 30px rgba(91, 192, 190, 0.1)",
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)", // Always use dark theme value
   transition: "transform 0.3s ease, box-shadow 0.3s ease",
   "&:hover": {
     transform: "translateY(-10px)",
-    boxShadow: theme.palette.mode === "dark" ? "0 15px 40px rgba(0, 0, 0, 0.4)" : "0 15px 40px rgba(91, 192, 190, 0.2)",
+    boxShadow: "0 15px 40px rgba(0, 0, 0, 0.4)", // Always use dark theme value
   },
 }))
 
@@ -71,7 +71,7 @@ const SkillsList = styled(Box)(({ theme }) => ({
 const SkillTag = styled(motion.div)(({ theme }) => ({
   padding: "0.5rem 1rem",
   borderRadius: "20px",
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(111, 255, 233, 0.1)" : "rgba(91, 192, 190, 0.1)",
+  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
   color: theme.palette.textSecondary.main,
   fontSize: "0.9rem",
   fontWeight: 500,
@@ -209,10 +209,10 @@ const About = ({ setCursorVariant }) => {
                   <CodeIcon sx={{ fontSize: "2rem", color: "#fff" }} />
                 </IconWrapper>
                 <Typography variant="h5" color="textMain.main" sx={{ mb: 2, fontWeight: 600 }}>
-                  Frontend Development
+                  Fullstack Development
                 </Typography>
                 <Typography variant="body2" color="textSecondary.main" sx={{ mb: 2 }}>
-                  I build responsive and interactive user interfaces using modern JavaScript frameworks and libraries, ensuring smooth user experiences.
+                I build full-stack web applications with modern JavaScript, creating seamless and interactive user experiences from front end to backend.
 .
                 </Typography>
                 <SkillsList>

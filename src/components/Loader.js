@@ -13,7 +13,7 @@ const StyledLoaderContainer = styled("div")(({ theme }) => ({
   height: "100%",
   width: "100%",
   position: "fixed",
-  backgroundColor: theme.palette.background.main,
+  backgroundColor: theme.palette.background.default, // Use dark theme default background
   zIndex: 9999,
 }))
 
@@ -28,10 +28,7 @@ const LogoText = styled(motion.h1)(({ theme }) => ({
   fontSize: "2rem",
   fontWeight: "bold",
   marginTop: "1rem",
-  background:
-    theme.palette.mode === "dark"
-      ? "linear-gradient(to right, #6FFFE9, #5BC0BE)"
-      : "linear-gradient(to right, #0B132B, #3A506B)",
+  background: "linear-gradient(to right, #6FFFE9, #5BC0BE)", // Always use dark theme gradient
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
 }))
@@ -105,8 +102,9 @@ const Loader = () => {
         >
           <defs>
             <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={theme.palette.mode === "dark" ? "#6FFFE9" : "#5BC0BE"} />
-              <stop offset="100%" stopColor={theme.palette.mode === "dark" ? "#5BC0BE" : "#3E9F9D"} />
+              {/* Always use dark theme colors */}
+              <stop offset="0%" stopColor="#6FFFE9" />
+              <stop offset="100%" stopColor="#5BC0BE" />
             </linearGradient>
           </defs>
           <path
