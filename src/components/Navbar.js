@@ -291,7 +291,7 @@ const Navbar = () => {
         >
           <StyledDrawerList>
             <StyledResumeLink
-              href="https://drive.google.com/file/d/1Clpyq8oSYrGLjZBfuagXyJwZdnURKH28/view"
+              href="https://drive.google.com/file/d/1wWMvSNbApyGq4ee90ugdx25_jTkMpPoe/view?usp=sharing"
               target="_blank"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -355,7 +355,7 @@ const Navbar = () => {
         transition={{ delay: navbarData.length * 0.1 + 0.2, duration: 0.5 }}
       >
         <StyledResumeLink
-          href="https://drive.google.com/file/d/1Clpyq8oSYrGLjZBfuagXyJwZdnURKH28/view"
+          href="https://drive.google.com/file/d/1wWMvSNbApyGq4ee90ugdx25_jTkMpPoe/view?usp=sharing"
           target="_blank"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
