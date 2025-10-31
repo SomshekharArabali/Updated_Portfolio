@@ -1,9 +1,11 @@
 "use client"
-import { Box, Typography, Grid, Card, CardContent, styled, useTheme } from "@mui/material"
+import { Box, Typography, Grid, Card, CardContent, styled, useTheme, Button } from "@mui/material" // Import Button
 import { motion } from "framer-motion"
 import SportsIcon from "@mui/icons-material/Sports"
 import MenuBookIcon from "@mui/icons-material/MenuBook"
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports"
+import { useNavigate } from "react-router-dom" // Import useNavigate
+import BookIcon from '@mui/icons-material/Book'; // Import a book icon
 
 // Component styles
 const StyledHobbiesSection = styled(Box)(({ theme }) => ({
@@ -65,6 +67,7 @@ const IconWrapper = styled(Box)(({ theme }) => ({
 
 const Hobbies = ({ setCursorVariant }) => {
   const theme = useTheme()
+  const navigate = useNavigate() // Initialize useNavigate
 
   // Animation variants
   const containerVariants = {
@@ -127,6 +130,11 @@ const Hobbies = ({ setCursorVariant }) => {
     },
   }
 
+  // Handler for "Books I Have Read" button click
+  const handleBooksReadClick = () => {
+    navigate("/books") // Navigate to the new books page
+  }
+
   // Hobbies data based on the screenshot
   const hobbies = [
     {
@@ -150,7 +158,7 @@ const Hobbies = ({ setCursorVariant }) => {
   ]
 
   return (
-    <StyledHobbiesSection id="Hobbies">
+    <StyledHobbiesSection id="Hobbies"> {/* Added id="Hobbies" here */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -178,6 +186,8 @@ const Hobbies = ({ setCursorVariant }) => {
                 whileHover="hover"
                 onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
                 onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
+                // Removed onClick handler from the card itself
+                style={{ cursor: 'default' }} // Ensure cursor is default for cards
               >
                 <HobbyCard>
                   <motion.div variants={iconVariants} whileHover="hover">
@@ -193,6 +203,35 @@ const Hobbies = ({ setCursorVariant }) => {
                   </CardContent>
                 </HobbyCard>
               </motion.div>
+              {hobby.id === 2 && ( // Render button only for "Craft & Read" card
+                <Box sx={{ mt: 2, textAlign: 'center' }}>
+                  <Button
+                    variant="contained"
+                    startIcon={<BookIcon />}
+                    onClick={handleBooksReadClick}
+                    component={motion.button}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
+                    onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
+                    sx={{
+                      background: theme.palette.gradients.primary,
+                      px: 3,
+                      py: 1,
+                      borderRadius: "8px",
+                      fontSize: "0.9rem",
+                      fontWeight: 500,
+                      boxShadow: "0 4px 20px rgba(91, 192, 190, 0.2)",
+                      "&:hover": {
+                        background: theme.palette.gradients.primary,
+                        boxShadow: "0 6px 25px rgba(91, 192, 190, 0.3)",
+                      },
+                    }}
+                  >
+                    Books I Have Read
+                  </Button>
+                </Box>
+              )}
             </Grid>
           ))}
         </Grid>

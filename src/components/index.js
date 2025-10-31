@@ -7,4 +7,5 @@ export { default as Experience } from "./sections/Experience"
 export { default as Certifications } from "./sections/Certifications"
 export { default as Projects } from "./sections/Projects"
 export { default as Hobbies } from "./sections/Hobbies"
+export { default as BooksRead } from "./sections/BooksRead" // Keep BooksRead export as it's used by BooksReadPage
 export { default as Footer } from "./sections/Footer"

@@ -1,0 +1,121 @@
+[
+  {
+    "id": "0",
+    "title": "Norwegian Wood",
+    "author": "Haruki Murakami",
+    "image": "/images/books/norwegian_wood.jpg",
+    "quote": "\"If you only read the books that everyone else is reading, you can only think what everyone else is thinking.\""
+  },
+  {
+    "id": "1",
+    "title": "A Song of Ice and Fire",
+    "author": "George R. R. Martin",
+    "image": "/images/books/a_song_of_ice_and_fire.jpg",
+    "quote": "\"When you play the game of thrones, you win or you die.\""
+  },
+  {
+    "id": "2",
+    "title": "Harry Potter and the Prisoner of Azkaban",
+    "author": "J.K. Rowling",
+    "image": "/images/books/prisoner_of_azkaban.jpg",
+    "quote": "\"Happiness can be found even in the darkest of times, if one only remembers to turn on the light.\""
+  },
+  {
+    "id": "3",
+    "title": "It Ends With Us",
+    "author": "Colleen Hoover",
+    "image": "/images/books/it_ends_with_us.jpg",
+    "quote": "\"Just because someone hurts you doesn’t mean you can simply stop loving them.\""
+  },
+  {
+    "id": "4",
+    "title": "It Starts With Us",
+    "author": "Colleen Hoover",
+    "image": "/images/books/it_starts_with_us.jpg",
+    "quote": "\"Sometimes the one who loves you is the one who hurts you the most.\""
+  },
+  {
+    "id": "5",
+    "title": "Ugly Love",
+    "author": "Colleen Hoover",
+    "image": "/images/books/ugly_love.jpg",
+    "quote": "\"Love isn’t always pretty. Sometimes you spend all your time hoping it’ll eventually be something different.\""
+  },
+  {
+    "id": "6",
+    "title": "Your Fault",
+    "author": "Andrew Cowan",
+    "image": "/images/books/your_fault.jpg",
+    "quote": "\"The stories we tell ourselves shape the lives we lead.\""
+  },
+  {
+    "id": "7",
+    "title": "Mile High",
+    "author": "Liz Tomforde",
+    "image": "/images/books/mile_high.jpg",
+    "quote": "\"Sometimes love takes you to unexpected altitudes.\""
+  },
+  {
+    "id": "8",
+    "title": "Ikigai",
+    "author": "Héctor García and Francesc Miralles",
+    "image": "/images/books/ikigai.jpg",
+    "quote": "\"The purpose of life is to find your purpose and give your whole heart and soul to it.\""
+  },
+  {
+    "id": "9",
+    "title": "Eat That Frog!",
+    "author": "Brian Tracy",
+    "image": "/images/books/eat_that_frog.jpg",
+    "quote": "\"If you have to eat two frogs, eat the ugliest one first.\""
+  },
+  {
+    "id": "10",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "image": "/images/books/subtle_art.jpg",
+    "quote": "\"You can’t be an important and life-changing presence for some people without also being a joke and an embarrassment to others.\""
+  },
+  {
+    "id": "11",
+    "title": "Kafka on the Shore",
+    "author": "Haruki Murakami",
+    "image": "/images/books/kafka_on_the_shore.jpg",
+    "quote": "\"Memories warm you up from the inside. But they also tear you apart.\""
+  },
+  {
+    "id": "12",
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "image": "/images/books/the_fault_in_our_stars.jpg",
+    "quote": "\"You don’t get to choose if you get hurt in this world, but you do have some say in who hurts you.\""
+  },
+  {
+    "id": "13",
+    "title": "3000 Stitches",
+    "author": "Sudha Murty",
+    "image": "/images/books/3000_stitches.jpg",
+    "quote": "\"Every small act of kindness adds up to something bigger than you can imagine.\""
+  },
+  {
+    "id": "14",
+    "title": "The Kite Runner",
+    "author": "Khaled Hosseini",
+    "image": "/images/books/the_kite_runner.jpg",
+    "quote": "\"For you, a thousand times over.\""
+  },
+  {
+    "id": "15",
+    "title": "Kimayagar",
+    "author": "B. R. Bhagwat",
+    "image": "/images/books/kimayagar.jpg",
+    "quote": "\"Magic lies in curiosity and courage to explore the unknown.\""
+  },
+  {
+    "id": "16",
+    "title": "Archer's Voice",
+    "author": "Mia Sheridan",
+    "image": "/images/books/archers_voice.jpg",
+    "quote": "\"Sometimes the silence between two people is more powerful than a thousand words.\""
+  }
+]

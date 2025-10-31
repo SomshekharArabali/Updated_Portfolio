@@ -1,35 +1,32 @@
 "use client"
-import { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom"
-import { Container, useMediaQuery, styled, useTheme } from "@mui/material"
-import { motion, AnimatePresence } from "framer-motion"
-import profileImg from "../assets/profile.png"
-import {
-  Navbar,
-  Hero,
-  About,
-  Experience,
-  Certifications,
-  Hobbies,
-  Projects,
-  Footer,
-  SideAnchorLinks,
-} from "./"
 
-const StyledMain = styled(motion.div)(({ theme }) => ({
+import { useState, useEffect } from "react"
+import { Container, useMediaQuery, styled, useTheme, Button, Box } from "@mui/material"
+import { motion, AnimatePresence } from "framer-motion"
+import { BooksRead, Footer } from "../components"
+import { useNavigate } from "react-router-dom"
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+
+const StyledBooksReadPage = styled(motion.div)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   overflow: "hidden",
   position: "relative",
   minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
 }))
 
-const StyledContainer = styled(Container)({
+const StyledPageContainer = styled(Container)({
   maxWidth: "1600px",
   position: "relative",
   zIndex: 1,
+  flexGrow: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
 })
 
-// Background gradient elements
+// Background gradient elements (replicated from Main.js for consistency)
 const BackgroundGradient = styled(motion.div)(({ theme }) => ({
   position: "absolute",
   top: "20%",
@@ -54,7 +51,7 @@ const BackgroundGradient2 = styled(motion.div)(({ theme }) => ({
   zIndex: 0,
 }))
 
-// Cursor follower
+// Cursor follower (replicated from Main.js for consistency)
 const CursorFollower = styled(motion.div)(({ theme }) => ({
   position: "fixed",
   width: "40px",
@@ -67,15 +64,15 @@ const CursorFollower = styled(motion.div)(({ theme }) => ({
   opacity: 0.5,
 }))
 
-const Main = () => {
+const BooksReadPage = () => {
   const theme = useTheme()
   const isMediumScreen = useMediaQuery(theme.breakpoints.up("md"))
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [cursorVariant, setCursorVariant] = useState("default")
-  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
     const mouseMove = (e) => {
       setMousePosition({
@@ -90,21 +87,6 @@ const Main = () => {
       window.removeEventListener("mousemove", mouseMove)
     }
   }, [])
-
-  // Handle scroll to section when navigating back from BooksReadPage
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      const element = document.getElementById(location.state.scrollTo)
-      if (element) {
-        // Small delay to ensure page is fully rendered
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }, 100)
-      }
-      // Clear the state after scrolling
-      window.history.replaceState({}, document.title)
-    }
-  }, [location])
 
   const variants = {
     default: {
@@ -126,11 +108,24 @@ const Main = () => {
     },
   }
 
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeInOut",
+      },
+    },
+  }
+
   return (
-    <StyledMain
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+    <StyledBooksReadPage
+      initial="initial"
+      animate="animate"
+      variants={pageVariants}
       onMouseEnter={() => setCursorVariant("default")}
     >
       <CursorFollower
@@ -144,19 +139,36 @@ const Main = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.5 }}
       />
-      <Navbar setCursorVariant={setCursorVariant} />
-      <StyledContainer>
-        <Hero img={profileImg} setCursorVariant={setCursorVariant} />
-        <About setCursorVariant={setCursorVariant} />
-        <Experience setCursorVariant={setCursorVariant} />
-        <Certifications setCursorVariant={setCursorVariant} />
-        <Hobbies setCursorVariant={setCursorVariant} />
-        <Projects setCursorVariant={setCursorVariant} />
-      </StyledContainer>
+      {/* Moved the button Box here, outside StyledPageContainer */}
+      <Box sx={{ position: 'absolute', top: theme.spacing(2), left: theme.spacing(2), zIndex: 10 }}>
+        <Button
+  variant="outlined"
+  startIcon={<ArrowBackIcon />}
+  onClick={() => navigate('/', { state: { scrollTo: 'Hobbies' } })}
+  sx={{
+    borderColor: "white",
+    color: "white",
+    "&:hover": {
+      borderColor: "white",
+      backgroundColor: "rgba(255, 255, 255, 0.1)",
+    },
+  }}
+  component={motion.button}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onMouseEnter={() => setCursorVariant("hover")}
+  onMouseLeave={() => setCursorVariant("default")}
+>
+  Back to Hobbies
+</Button>
+
+      </Box>
+      <StyledPageContainer>
+        <BooksRead setCursorVariant={setCursorVariant} />
+      </StyledPageContainer>
       <Footer setCursorVariant={setCursorVariant} />
-      <SideAnchorLinks setCursorVariant={setCursorVariant} />
-    </StyledMain>
+    </StyledBooksReadPage>
   )
 }
 
-export default Main
+export default BooksReadPage
