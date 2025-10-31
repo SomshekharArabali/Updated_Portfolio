@@ -127,28 +127,51 @@ const Certifications = ({ setCursorVariant }) => {
 
   // Certifications data with correct image paths
   const certifications = [
-    {
-      id: 1,
-      title: "AWS Certified Cloud Practitioner",
-      issueDate: "July 14, 2025",
-      image: "/images/AWS.jpg",
-      issuer: "Amazon Web Services",
-    },
-    {
-      id: 2,
-      title: "Microsoft Certified: Azure Fundamentals",
-      issueDate: "February 23, 2025",
-      image: "/images/Azure.jpg",
-      issuer: "Microsoft",
-    },
-    {
-      id: 3,
-      title: "Oracle Certified Foundations Associate",
-      issueDate: "February 22, 2025",
-      image: "/images/Oracle.jpg",
-      issuer: "Oracle",
-    },
-  ]
+  {
+    id: 1,
+    title: "AWS Certified Cloud Practitioner",
+    issueDate: "July 14, 2025",
+    image: "/images/AWS.jpg",
+    issuer: "Amazon Web Services",
+  },
+  {
+    id: 2,
+    title: "Microsoft Certified: Azure Fundamentals",
+    issueDate: "February 23, 2025",
+    image: "/images/Azure.jpg",
+    issuer: "Microsoft",
+  },
+  {
+    id: 3,
+    title: "Oracle Certified Foundations Associate",
+    issueDate: "February 22, 2025",
+    image: "/images/Oracle.jpg",
+    issuer: "Oracle",
+  },
+  {
+    id: 4,
+    title: "Google Cloud Fundamentals: Core Infrastructure",
+    issueDate: "November 10, 2023",
+    image: "/images/GoogleCloud.jpg",
+    issuer: "Google Cloud (Coursera)",
+    verifyLink: "https://coursera.org/verify/DPBQU8ACY775"
+  },
+  {
+    id: 5,
+    title: "Google Student Gemini Challenge",
+    issueDate: "October 31, 2025",
+    image: "/images/GoogleGemini.jpg",
+    issuer: "Google Student Ambassador Program"
+  },
+  {
+    id: 6,
+    title: "AWS Certified AI Practitioner (Exam Prep: AIF-C01)",
+    issueDate: "March 4, 2025",
+    image: "/images/AWS_AI_Practitioner.jpg",
+    issuer: "Amazon Web Services"
+  }
+];
+
 
   return (
     <StyledCertificationsSection id="Certifications">
