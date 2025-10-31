@@ -15,15 +15,16 @@ import {
   Tab,
   useMediaQuery,
 } from "@mui/material"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import LaunchIcon from "@mui/icons-material/Launch"
-import projectsData from "../../content/projects.json" // Import project data
-import { useState } from "react" // Import useState
+import projectsData from "../../content/projects.json"
+import { useState } from "react"
 
 const TabPanelContainer = styled(Box)(({ theme }) => ({
   position: "relative",
-  minHeight: "600px", // keeps a consistent height for all tabs
+  width: "100%",
+  minHeight: "800px",
 }));
 
 // Component styles
@@ -55,23 +56,27 @@ const ProjectCard = styled(Card)(({ theme }) => ({
   height: "100%",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: "rgba(28, 37, 65, 0.8)", // Always use dark theme value
+  backgroundColor: "rgba(28, 37, 65, 0.8)",
   backdropFilter: "blur(10px)",
   borderRadius: "16px",
   overflow: "hidden",
-  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)", // Always use dark theme value
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
   transition: "all 0.3s ease",
+  "&:hover": {
+    transform: "translateY(-10px)",
+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
+  },
 }))
 
 const ProjectMedia = styled(CardMedia)(({ theme }) => ({
   height: "200px",
   position: "relative",
   overflow: "hidden",
-  backgroundSize: "contain", /* Changed from 'cover' to 'contain' */
+  backgroundSize: "contain",
   backgroundPosition: "center",
-  backgroundRepeat: "no-repeat", /* Ensure image doesn't repeat */
-  backgroundColor: "rgba(11, 19, 43, 0.7)", /* Added a background color for consistency */
-  padding: "1rem", /* Added padding to give images some breathing room */
+  backgroundRepeat: "no-repeat",
+  backgroundColor: "rgba(11, 19, 43, 0.7)",
+  padding: "1rem",
   "&::before": {
     content: '""',
     position: "absolute",
@@ -79,7 +84,7 @@ const ProjectMedia = styled(CardMedia)(({ theme }) => ({
     left: 0,
     width: "100%",
     height: "100%",
-    background: "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))", // Always use dark theme gradient
+    background: "linear-gradient(to bottom, rgba(11, 19, 43, 0.3), rgba(11, 19, 43, 0.6))",
     opacity: 0,
     transition: "opacity 0.3s ease",
   },
@@ -100,11 +105,11 @@ const ProjectActions = styled(CardActions)(({ theme }) => ({
 
 const TechChip = styled(Chip)(({ theme }) => ({
   margin: "0.25rem",
-  backgroundColor: "rgba(111, 255, 233, 0.1)", // Always use dark theme value
+  backgroundColor: "rgba(111, 255, 233, 0.1)",
   color: theme.palette.textSecondary.main,
   fontWeight: 500,
   "&:hover": {
-    backgroundColor: "rgba(111, 255, 233, 0.2)", // Always use dark theme value
+    backgroundColor: "rgba(111, 255, 233, 0.2)",
   },
 }))
 
@@ -128,35 +133,10 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }))
 
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      id={`project-tabpanel-${index}`}
-      aria-labelledby={`project-tab-${index}`}
-      {...other}
-      style={{
-        position: value === index ? "relative" : "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        transition: "opacity 0.4s ease",
-        opacity: value === index ? 1 : 0,
-        pointerEvents: value === index ? "auto" : "none",
-      }}
-    >
-      <Box sx={{ p: 3 }}>{children}</Box>
-    </div>
-  )
-}
-
-
 const Projects = ({ setCursorVariant }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
-  const [selectedCategory, setSelectedCategory] = useState(0) // 0 for All, 1 for Cloud, 2 for Full Stack, 3 for Java
+  const [selectedCategory, setSelectedCategory] = useState(0)
 
   const categories = ["All", "Cloud Solutions", "Full Stack Development", "Java Development"]
 
@@ -166,7 +146,7 @@ const Projects = ({ setCursorVariant }) => {
 
   const filteredProjects = projectsData.filter((project) => {
     if (selectedCategory === 0) {
-      return true // Show all projects
+      return true
     }
     return project.category === categories[selectedCategory]
   })
@@ -192,23 +172,6 @@ const Projects = ({ setCursorVariant }) => {
         duration: 0.8,
         ease: "easeOut",
       },
-    },
-  }
-
-  const cardVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: (i) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    }),
-    hover: {
-      y: -10,
-      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)", // Always use dark theme value
     },
   }
 
@@ -241,100 +204,84 @@ const Projects = ({ setCursorVariant }) => {
           </StyledTabs>
         </motion.div>
 
-      <TabPanelContainer>      
-        <AnimatePresence mode="wait">
-          {categories.map((category, index) => (
-            <TabPanel value={selectedCategory} index={index} key={category}>
-              <Grid container spacing={4}>
-                {filteredProjects
-                  .filter((project) => (index === 0 ? true : project.category === category))
-                  .map((project, projectIndex) => (
-                    <Grid item xs={12} sm={6} md={6} key={project.id}>
-                      <motion.div
-                        custom={projectIndex}
-                        variants={cardVariants}
-                        whileHover="hover"
-                        onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
-                        onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
+        <TabPanelContainer>
+          <Grid container spacing={4} sx={{ p: 3 }}>
+            {filteredProjects.map((project, projectIndex) => (
+              <Grid item xs={12} sm={6} md={6} key={project.id}>
+                <div
+                  onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
+                  onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
+                >
+                  <ProjectCard>
+                    <ProjectMedia
+                      image={project.image}
+                      title={project.title}
+                    />
+                    <ProjectContent>
+                      <Typography
+                        variant="h5"
+                        component="h3"
+                        color="textMain.main"
+                        gutterBottom
+                        sx={{ fontWeight: 600 }}
                       >
-                        <ProjectCard>
-                          <ProjectMedia
-                            component={motion.div}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.3 }}
-                            image={project.image}
-                            title={project.title}
+                        {project.title}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary.main" sx={{ mb: 2 }}>
+                        {project.description}
+                      </Typography>
+                      <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                        {project.skills.map((tech) => (
+                          <TechChip
+                            key={tech}
+                            label={tech}
+                            size="small"
                           />
-                          <ProjectContent>
-                            <Typography
-                              variant="h5"
-                              component="h3"
-                              color="textMain.main"
-                              gutterBottom
-                              sx={{ fontWeight: 600 }}
-                            >
-                              {project.title}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary.main" sx={{ mb: 2 }}>
-                              {project.description}
-                            </Typography>
-                            <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
-                              {project.skills.map((tech) => (
-                                <TechChip
-                                  key={tech}
-                                  label={tech}
-                                  size="small"
-                                  component={motion.div}
-                                  whileHover={{ scale: 1.1 }}
-                                />
-                              ))}
-                            </Box>
-                          </ProjectContent>
-                          <ProjectActions>
-                            {project.category !== "Cloud Solutions" && project.githubLink && (
-                              <Button
-                                size="small"
-                                startIcon={<GitHubIcon />}
-                                href={project.githubLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                sx={{
-                                  color: theme.palette.textMain.main,
-                                  "&:hover": {
-                                    color: theme.palette.textSecondary.main,
-                                  },
-                                }}
-                              >
-                                Code
-                              </Button>
-                            )}
-                            {project.websiteLink && (
-                              <Button
-                                size="small"
-                                startIcon={<LaunchIcon />}
-                                href={project.websiteLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                sx={{
-                                  color: theme.palette.textMain.main,
-                                  "&:hover": {
-                                    color: theme.palette.textSecondary.main,
-                                  },
-                                }}
-                              >
-                                Demo
-                              </Button>
-                            )}
-                          </ProjectActions>
-                        </ProjectCard>
-                      </motion.div>
-                    </Grid>
-                  ))}
+                        ))}
+                      </Box>
+                    </ProjectContent>
+                    <ProjectActions>
+                      {project.category !== "Cloud Solutions" && project.githubLink && (
+                        <Button
+                          size="small"
+                          startIcon={<GitHubIcon />}
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{
+                            color: theme.palette.textMain.main,
+                            "&:hover": {
+                              color: theme.palette.textSecondary.main,
+                            },
+                          }}
+                        >
+                          Code
+                        </Button>
+                      )}
+                      {project.websiteLink && (
+                        <Button
+                          size="small"
+                          startIcon={<LaunchIcon />}
+                          href={project.websiteLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{
+                            color: theme.palette.textMain.main,
+                            "&:hover": {
+                              color: theme.palette.textSecondary.main,
+                            },
+                          }}
+                        >
+                          Demo
+                        </Button>
+                      )}
+                    </ProjectActions>
+                  </ProjectCard>
+                </div>
               </Grid>
-            </TabPanel>
-          ))}
-        </AnimatePresence>
-      </TabPanelContainer>
+            ))}
+          </Grid>
+        </TabPanelContainer>
       </motion.div>
     </StyledProjectsSection>
   )
