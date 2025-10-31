@@ -342,9 +342,14 @@ const Navbar = () => {
           animate={!hasAnimated ? "visible" : false}
           variants={navItemVariants}
         >
-          <StyledAppBarLink href={`#${data.name}`} to={data.name} smooth={true} duration={1000}>
+          <StyledAppBarLink
+            href={`#${data.name}`}
+            to={data.name}
+            offset={-70} 
+          >
             <Typography>{data.name}</Typography>
           </StyledAppBarLink>
+
         </motion.div>
       ))}
 
