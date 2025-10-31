@@ -21,6 +21,11 @@ import LaunchIcon from "@mui/icons-material/Launch"
 import projectsData from "../../content/projects.json" // Import project data
 import { useState } from "react" // Import useState
 
+const TabPanelContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  minHeight: "600px", // keeps a consistent height for all tabs
+}));
+
 // Component styles
 const StyledProjectsSection = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
@@ -125,18 +130,28 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props
+
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
       id={`project-tabpanel-${index}`}
       aria-labelledby={`project-tab-${index}`}
       {...other}
+      style={{
+        position: value === index ? "relative" : "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        transition: "opacity 0.4s ease",
+        opacity: value === index ? 1 : 0,
+        pointerEvents: value === index ? "auto" : "none",
+      }}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      <Box sx={{ p: 3 }}>{children}</Box>
     </div>
   )
 }
+
 
 const Projects = ({ setCursorVariant }) => {
   const theme = useTheme()
@@ -226,6 +241,7 @@ const Projects = ({ setCursorVariant }) => {
           </StyledTabs>
         </motion.div>
 
+      <TabPanelContainer>      
         <AnimatePresence mode="wait">
           {categories.map((category, index) => (
             <TabPanel value={selectedCategory} index={index} key={category}>
@@ -318,6 +334,7 @@ const Projects = ({ setCursorVariant }) => {
             </TabPanel>
           ))}
         </AnimatePresence>
+      </TabPanelContainer>
       </motion.div>
     </StyledProjectsSection>
   )

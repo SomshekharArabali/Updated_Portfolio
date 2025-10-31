@@ -151,31 +151,29 @@ const Hero = ({ img, setCursorVariant }) => {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Link to="Projects" smooth={true} duration={1000}>
-              <Button
-                variant="contained"
-                component={motion.button}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onMouseEnter={() => setCursorVariant && setCursorVariant("hover")}
-                onMouseLeave={() => setCursorVariant && setCursorVariant("default")}
-                sx={{
-                  background: theme.palette.gradients.primary,
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: "8px",
-                  fontSize: "1rem",
-                  fontWeight: 500,
-                  boxShadow: "0 4px 20px rgba(91, 192, 190, 0.2)",
-                  "&:hover": {
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link to="Projects" smooth={true} duration={800} offset={-70}>
+                <Button
+                  variant="contained"
+                  sx={{
                     background: theme.palette.gradients.primary,
-                    boxShadow: "0 6px 25px rgba(91, 192, 190, 0.3)",
-                  },
-                }}
-              >
-                Check out my work
-              </Button>
-            </Link>
+                    px: 4,
+                    py: 1.5,
+                    borderRadius: "8px",
+                    fontSize: "1rem",
+                    fontWeight: 500,
+                    boxShadow: "0 4px 20px rgba(91, 192, 190, 0.2)",
+                    "&:hover": {
+                      background: theme.palette.gradients.primary,
+                      boxShadow: "0 6px 25px rgba(91, 192, 190, 0.3)",
+                    },
+                  }}
+                >
+                  Check out my work
+                </Button>
+              </Link>
+            </motion.div>
+
           </motion.div>
         </HeroContent>
       </motion.div>

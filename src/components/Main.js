@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { Container, useMediaQuery, styled, useTheme } from "@mui/material"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import profileImg from "../assets/profile.png"
 import {
   Navbar,
@@ -29,7 +29,6 @@ const StyledContainer = styled(Container)({
   zIndex: 1,
 })
 
-// Background gradient elements
 const BackgroundGradient = styled(motion.div)(({ theme }) => ({
   position: "absolute",
   top: "20%",
@@ -54,7 +53,6 @@ const BackgroundGradient2 = styled(motion.div)(({ theme }) => ({
   zIndex: 0,
 }))
 
-// Cursor follower
 const CursorFollower = styled(motion.div)(({ theme }) => ({
   position: "fixed",
   width: "40px",
@@ -76,32 +74,21 @@ const Main = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-
     const mouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      })
+      setMousePosition({ x: e.clientX, y: e.clientY })
     }
-
     window.addEventListener("mousemove", mouseMove)
-
-    return () => {
-      window.removeEventListener("mousemove", mouseMove)
-    }
+    return () => window.removeEventListener("mousemove", mouseMove)
   }, [])
 
-  // Handle scroll to section when navigating back from BooksReadPage
   useEffect(() => {
     if (location.state?.scrollTo) {
       const element = document.getElementById(location.state.scrollTo)
       if (element) {
-        // Small delay to ensure page is fully rendered
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          element.scrollIntoView({ behavior: "smooth", block: "start" })
         }, 100)
       }
-      // Clear the state after scrolling
       window.history.replaceState({}, document.title)
     }
   }, [location])
@@ -110,19 +97,13 @@ const Main = () => {
     default: {
       x: mousePosition.x - 20,
       y: mousePosition.y - 20,
-      transition: {
-        type: "spring",
-        mass: 0.6,
-      },
+      transition: { type: "spring", mass: 0.6 },
     },
     hover: {
       x: mousePosition.x - 20,
       y: mousePosition.y - 20,
       scale: 1.5,
-      transition: {
-        type: "spring",
-        mass: 0.6,
-      },
+      transition: { type: "spring", mass: 0.6 },
     },
   }
 
@@ -139,20 +120,20 @@ const Main = () => {
         style={{ display: isMediumScreen ? "block" : "none" }}
       />
       <BackgroundGradient initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }} />
-      <BackgroundGradient2
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-      />
+      <BackgroundGradient2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.5 }} />
+
       <Navbar setCursorVariant={setCursorVariant} />
+
       <StyledContainer>
         <Hero img={profileImg} setCursorVariant={setCursorVariant} />
         <About setCursorVariant={setCursorVariant} />
         <Experience setCursorVariant={setCursorVariant} />
         <Certifications setCursorVariant={setCursorVariant} />
-        <Hobbies setCursorVariant={setCursorVariant} />
+        {/* ⬇️ moved Hobbies below Projects */}
         <Projects setCursorVariant={setCursorVariant} />
+        <Hobbies setCursorVariant={setCursorVariant} />
       </StyledContainer>
+
       <Footer setCursorVariant={setCursorVariant} />
       <SideAnchorLinks setCursorVariant={setCursorVariant} />
     </StyledMain>
