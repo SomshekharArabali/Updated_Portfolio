@@ -20,7 +20,7 @@
     "id": "9",
     "title": "AWS Prep for CLF-C02 Exam Practice",
     "image": "../images/aws_prep.jpeg",
-    "description": "A fully responsive AWS CLF-C02 practice platform built with Next.js (App Router). Includes dynamic questions, validation with Zod, result tracking, and a polished UI powered by Tailwind CSS and shadcn/ui components.",
+    "description": "A fully responsive AWS CLF-C02 practice platform built with Next.js.",
     "skills": [
       "Next.js",
       "TypeScript",
