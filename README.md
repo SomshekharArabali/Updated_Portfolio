@@ -62,15 +62,11 @@ This is the main landing page of the portfolio. It's a scrollable page divided i
 *   **Hobbies**: Highlights personal interests and pastimes, including a link to the "Books I Have Read" page.
 *   **Contact**: Provides information on how to get in touch.
 
-![Home Page Screenshot](path/to/your/homepage-screenshot.png)
-*(Please replace `path/to/your/homepage-screenshot.png` with the actual link to your screenshot)*
-
+![Home Page](public/images/books/Home.gif)
 ### Books Read Page 
 Accessible from the "Hobbies" section, this dedicated page displays a curated list of books the developer has read. Each book includes its title, author, cover image, and an inspiring quote.
 
-![Books Read Page Screenshot](path/to/your/books-page-screenshot.png)
-*(Please replace `path/to/your/books-page-screenshot.png` with the actual link to your screenshot)*
-
+![Books Read](public/images/books.gif)
 
 
 ## 💖 Thank you for visiting
