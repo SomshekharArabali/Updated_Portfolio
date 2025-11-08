@@ -1,31 +1,63 @@
 [
   {
-    "id": "0",
-    "title": "Online Resume Builder",
-    "image": "../images/image.png",
-    "description": "A web application to build and manage online resumes with various templates.",
-    "skills": ["React", "Redux", "CSS", "HTML", "JavaScript"],
-    "websiteLink": "https://aroma-internship-week-5-online-resume-builder.vercel.app/",
-    "githubLink": "https://github.com/SomshekharArabali/Aroma-Internship-week-5--online-resume-Builder",
+    "id": "1",
+    "title": "Somashekhar Arabali | Portfolio",
+    "image": "../images/personal-portfolio.png",
+    "description": "A personal portfolio website built with React.js .",
+    "skills": [
+      "React.js",
+      "JavaScript",
+      "Material-UI",
+      "Emotion",
+      "Framer Motion"
+    ],
+    "websiteLink": "https://portfolio-1-eta-two.vercel.app/",
+    "githubLink": "https://github.com/SomshekharArabali/personal-portfolio",
     "category": "Full Stack Development"
   },
+
   {
-    "id": "1",
-    "title": "CICD Migration",
-    "image": "../images/cicd.png",
-    "description": "Migrated GitHub CI pipelines to Azure CI pipelines, improving deployment efficiency and reliability.",
-    "skills": ["Docker", "Azure", "Cloud", "DevOps", "Python", ".Net"],
-    "githubLink": "https://github.com/SomshekharArabali/migrating-github-ci-pipelines-to-azure-ci-pipelines",
-    "category": "Cloud Solutions"
+    "id": "9",
+    "title": "AWS Prep for CLF-C02 Exam Practice",
+    "image": "../images/aws_prep.jpeg",
+    "description": "A fully responsive AWS CLF-C02 practice platform built with Next.js (App Router). Includes dynamic questions, validation with Zod, result tracking, and a polished UI powered by Tailwind CSS and shadcn/ui components.",
+    "skills": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Zod",
+      "Lucide React"
+    ],
+    "websiteLink": "https://aws-prep.vercel.app/",
+    "githubLink": "https://github.com/SomshekharArabali/AWS-prep",
+    "category": "Full Stack Development"
   },
+
   {
     "id": "2",
     "title": "Starbucks Website",
     "image": "../images/starbucks.png",
     "description": "Full-stack Starbucks clone with React frontend, Node/Express backend, JWT auth, and MongoDB-powered product & order system.",
-    "skills": ["React.js", "Node.js", "Express", "MongoDB", "Stripe", "JWT", "HTML", "CSS", "JavaScript"],
+    "skills": ["React.js", "Node.js", "Express", "MongoDB", "Stripe", "JWT"],
     "websiteLink": "https://somshekhararabali.github.io/Responsive-Starbucks-website_/",
     "githubLink": "https://github.com/SomshekharArabali/Responsive-Starbucks-website_",
+    "category": "Full Stack Development"
+  },
+  {
+    "id": "11",
+    "title": "SITS Complaint Management System",
+    "image": "../images/complaint-management.png",
+    "description": "A full-stack complaint management system built using React, TypeScript, Tailwind CSS, and Supabase. ",
+    "skills": [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Lucide React"
+    ],
+    "websiteLink": "https://student-complaint-system-be.vercel.app/",
+    "githubLink": "https://github.com/SomshekharArabali/Student-Complaint-System-BE-",
     "category": "Full Stack Development"
   },
   {
@@ -38,6 +70,28 @@
     "githubLink": "https://github.com/SomshekharArabali/Aroma-Internship-Week-4-Real-Estate-Website",
     "category": "Full Stack Development"
   },
+
+  {
+    "id": "0",
+    "title": "Online Resume Builder",
+    "image": "../images/resumeBuilder.png",
+    "description": "A web application to build and manage online resumes with various templates.",
+    "skills": ["React", "Redux", "CSS", "HTML", "JavaScript"],
+    "websiteLink": "https://aroma-internship-week-5-online-resume-builder.vercel.app/",
+    "githubLink": "https://github.com/SomshekharArabali/Aroma-Internship-week-5--online-resume-Builder",
+    "category": "Full Stack Development"
+  },
+
+  {
+    "id": "1",
+    "title": "CICD Migration",
+    "image": "../images/cicd.png",
+    "description": "Migrated GitHub CI pipelines to Azure CI pipelines, improving deployment efficiency and reliability.",
+    "skills": ["Docker", "Azure", "Cloud", "DevOps", "Python", ".Net"],
+    "githubLink": "https://github.com/SomshekharArabali/migrating-github-ci-pipelines-to-azure-ci-pipelines",
+    "category": "Cloud Solutions"
+  },
+
   {
     "id": "4",
     "title": "Java Spring Boot Microservice",
@@ -47,6 +101,7 @@
     "githubLink": "null",
     "category": "Java Development"
   },
+
   {
     "id": "5",
     "title": "Image Label Generator",
@@ -57,44 +112,59 @@
     "githubLink": "https://github.com/SomshekharArabali/aws-rekognition-label-generator",
     "category": "Cloud Solutions"
   },
+
   {
     "id": "6",
     "title": "Text Narrator (Amazon Polly)",
     "image": "../images/cloud_second.png",
     "description": "Developed a text-to-speech narrator using Amazon Polly and AWS Lambda, converting text into lifelike speech and storing audio files in S3 for easy access.",
-    "skills": ["AWS", "Amazon Polly", "AWS Lambda", "S3", "Python", "Node.js", "API Gateway"],
+    "skills": [
+      "AWS",
+      "Amazon Polly",
+      "AWS Lambda",
+      "S3",
+      "Python",
+      "Node.js",
+      "API Gateway"
+    ],
     "websiteLink": null,
     "githubLink": "https://github.com/SomshekharArabali/aws-polly-text-narrator",
     "category": "Cloud Solutions"
   },
+
   {
     "id": "7",
     "title": "Language Translation Bot",
     "image": "../images/cloud_third.png",
     "description": "Created a conversational AI bot using Amazon Lex and AWS Lambda for real-time language translation, integrating with Amazon Translate to provide multilingual support.",
-    "skills": ["AWS", "Amazon Lex", "AWS Lambda", "Amazon Translate", "API Gateway"],
+    "skills": [
+      "AWS",
+      "Amazon Lex",
+      "AWS Lambda",
+      "Amazon Translate",
+      "API Gateway"
+    ],
     "websiteLink": null,
     "githubLink": "https://github.com/SomshekharArabali/aws-lex-translation-bot",
     "category": "Cloud Solutions"
   },
+
   {
     "id": "8",
     "title": "Bucket List Tracker (AWS Amplify)",
     "image": "../images/cloud_forth.png",
     "description": "Deployed a full-stack bucket list tracker application on AWS Amplify, featuring a React frontend, serverless backend (Lambda/DynamoDB), and CI/CD integration.",
-    "skills": ["AWS Amplify", "React", "AWS Lambda", "DynamoDB", "API Gateway", "Cognito", "CI/CD"],
+    "skills": [
+      "AWS Amplify",
+      "React",
+      "AWS Lambda",
+      "DynamoDB",
+      "API Gateway",
+      "Cognito",
+      "CI/CD"
+    ],
     "websiteLink": null,
     "githubLink": "https://github.com/SomshekharArabali/aws-amplify-bucket-list",
     "category": "Cloud Solutions"
-  },
-  {
-    "id": "9",
-    "title": "AWS Prep for CLF-C02 Exam Practice",
-    "image": "../images/aws_prep.jpeg",
-    "description": "Built a responsive React quiz app for AWS CLF-C02 prep with dynamic questions, score tracking, and a user-friendly interface.",
-    "skills": ["React.js", "HTML", "CSS", "JavaScript", "AWS CLF-C02"],
-    "websiteLink": "https://aws-prep.vercel.app/",
-    "githubLink": "https://github.com/SomshekharArabali/AWS-prep",
-    "category": "Full Stack Development"
   }
 ]
