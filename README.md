@@ -48,6 +48,45 @@ Follow these steps to get the project up and running on your local machine:
 4.  **Open in browser**:
     The application will open in your default browser at `http://localhost:3000`.
 
+## 🐳 Run with Docker
+
+You can run this portfolio without installing Node.js, npm, or any frontend tools.  
+Just pull the Docker image and start the container — your site will run instantly.
+
+### **1️⃣ Pull the image**
+```bash
+docker pull somshekhararabali/personal-portfolio:latest
+```
+
+### **2️⃣ Run the container**
+```bash
+docker run -d -p 8080:80 --name portfolio-container somshekhararabali/personal-portfolio:latest
+```
+
+### **3️⃣ Open the app in your browser**
+```
+http://localhost:8080
+```
+
+### **4️⃣ Stop the container (optional)**
+```bash
+docker stop portfolio-container
+```
+
+### **5️⃣ Remove the container (optional)**
+```bash
+docker rm portfolio-container
+```
+
+### **6️⃣ Remove the image (optional)**
+```bash
+docker rmi somshekhararabali/personal-portfolio:latest
+```
+
+---
+
+
+
 ## 📄 Page Previews
 
 Here's a brief description of the main pages in the application, along with placeholders for screenshots:
